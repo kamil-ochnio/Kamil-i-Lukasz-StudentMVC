@@ -9,4 +9,11 @@ app.controller('MainCtrl', function($scope,$http) {
                 console.log(data);
             });
         }
+  $scope.usunStudenta=function(index){
+	  alert($scope.studenci[index].id);
+	  $http.get('/AngularSpringApp/studenci/usunStudenta/'+$scope.studenci[index].id).
+      success(function() {
+    	  $scope.pokazStudentow();
+      });
+  }
 });

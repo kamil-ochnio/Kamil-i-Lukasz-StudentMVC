@@ -6,12 +6,15 @@
   <script src="app.js"></script>
 </head>
 <body ng-controller="MainCtrl">
-<h1>Lista student�w :)</h1>
+<h1>Lista studentów :)</h1>
   
   <ul ng-repeat="student in studenci">
-	<li>{{student.imie}}</li>
+	<li>{{student.imie}} {{student.nazwisko}}
+		<input type="button" value="Usuń studenta" ng-click="usunStudenta($index)"/>
+	</li>
+	
   </ul>
   
-  <input type="button" value="pobierzStudentow" ng-click="pokazStudentow()"/>
+  <input type="button" value="Pobier studentów" ng-click="pokazStudentow()"/>
 </body>
 </html>
