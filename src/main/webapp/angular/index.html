@@ -7,15 +7,90 @@
   <script src="app.js"></script>
 </head>
 <body ng-controller="MainCtrl">
+<div id="main" ng-app>
+	<!-- The navigation menu will get the value of the "active" variable as a class.
+		 The $event.preventDefault() stops the page from jumping when a link is clicked. -->
+
+	<nav class="{{active}}" ng-click="$event.preventDefault()">
+
+		<!-- When a link in the menu is clicked, we set the active variable -->
+		<a href="#" class="home" ng-click="active='home'">Home</a>
+		<a href="#" class="lista" ng-click="active='lista'">Lista studentów</a>
+		<a href="#" class="dodaj" ng-click="active='dodaj'">Dodaj studenta</a>
+	</nav>
+	
+	
+	<div ng-show="active == 'home'">
+		<h1> Strona domowa systemu zarządzania studentami</h1>
+	</div>
+	
+	<div ng-show="active == 'lista'"> 
+		<h1>Lista studentów :)</h1>
+  
+  		<ul ng-repeat="student in studenci">
+		<li> 
+			{{student.imie}} {{student.nazwisko}}
+			<a class="buttons edit" href="#"  ng-click="edytujStudenta($index)">Edycja</a>
+		</li>
+  		</ul>
+  
+  		<input type="button" class="buttons" value="Wczytaj studentów" ng-click="pokazStudentow()"/>
+	</div>
+	
+	<div ng-show="active == 'edycja'">
+		<h3> Edycja studenta</h3>
+		Student: {{edytowanyStudent.imie}} {{edytowanyStudent.nazwisko}}, 
+		nr indeksu: {{edytowanyStudent.numerIndeksu}}
+		<br/>
+		<a class="buttons delete" href="#"  ng-click="usunStudenta()">Usuń studenta</a>
+		<a class="buttons add" href="#"  ng-click="#">Wystaw ocene</a>
+		
+	</div>
+	
+	<div ng-show="active == 'dodaj'">
+		<h3> Formularz dodawania studenta</h3>
+		<form  name="formularzDodawania">
+			<div>
+				<label>Imie*:</label>
+				<input ng-model="studentForm.imie" type="text" required>
+			</div>
+			<div>
+				<label>Nazwisko*:</label>
+				<input ng-model="studentForm.nazwisko" type="text" required>
+			</div>
+			<div>
+				<label>Nr indeksu:</label>
+				<input ng-model="studentForm.numerIndeksu" type="text" pattern="[0-9]*[0-9]">
+			</div>
+			<div>
+				<label>Wieczny:</label>
+				<input ng-model="studentForm.wieczny" type="checkbox">
+			</div>
+			<div>
+				<label>Pola oznaczone * są wymagane</label>
+			</div>
+			<div>
+				<input class="buttons" ng-disabled = "formularzDodawania.$invalid" type="button" value="Dodaj studenta" ng-click="dodajStudenta()">
+			</div>
+		</form>
+	</div>
+	
+</div>
+<!-- 
+
 <h1>Lista studentów :)</h1>
   
   <ul ng-repeat="student in studenci">
-	<li>{{student.imie}} {{student.nazwisko}}
-		<input type="button" value="Usuń studenta" ng-click="usunStudenta($index)"/>
+	<li> 
+		<a href="edycjaStudenta.html" title="Przejdź do edycji studenta" ng-click="edytujStudenta($index)">
+			{{student.imie}} {{student.nazwisko}}
+		</a>
+		<a class="buttons delete" href="#"  ng-click="usunStudenta($index)">Usuń studenta</a>
 	</li>
-	
   </ul>
   
   <input type="button" value="Pobierz studentów" ng-click="pokazStudentow()"/>
+  <input type="button" value="test" ng-click="test()"/>
+  -->
 </body>
 </html>

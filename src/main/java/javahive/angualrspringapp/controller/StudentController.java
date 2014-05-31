@@ -11,10 +11,14 @@ import lombok.extern.java.Log;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes(types = StudentDTO.class)
 @RequestMapping("/studenci")
 public class StudentController {
 
@@ -33,10 +37,26 @@ public class StudentController {
         return "pong";
     }
 
-    @RequestMapping("/usunStudenta/{id}")
-    @ResponseBody
-    void usunStudenta(@PathVariable int id) {
-        studenciApi.usunStudentaOZadanymId(id);
+    @RequestMapping(value="/usunStudenta/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody
+    String usunStudenta(@PathVariable int id) {
+        try {
+            studenciApi.usunStudentaOZadanymId(id);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Pomyœlnie usuniêto studenta";
+    }
+
+    @RequestMapping(value = "/dodajStudenta", method = RequestMethod.PUT)
+    public @ResponseBody
+    String dodajStudenta(@RequestBody StudentDTO student) {
+        try {
+            studenciApi.dodajStudenta(student, student.getNumerIndeksu());
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Pomyœlnie dodano studenta";
     }
 
 }
