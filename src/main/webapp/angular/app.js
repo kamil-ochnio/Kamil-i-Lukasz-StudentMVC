@@ -5,8 +5,9 @@ app.controller('MainCtrl', function($scope,$http) {
 	$scope.aktywnaListaPrzedmiotow=0;
 	$scope.name = "Felipe";
 	$scope.edytowanyStudent;
-	$scope.ocenaDoDodania;
+	$scope.ocenaDoDodania="";
 	$scope.studentForm = {};
+	$scope.ocenyStudenta = {};
 	$scope.pokazStudentow=function(){
 		$http.get(appName+'/studenci/lista').
                 success(function(data) {
@@ -36,6 +37,7 @@ app.controller('MainCtrl', function($scope,$http) {
 	$scope.edytujStudenta=function(index){
 		$scope.active="edycja";
 		$scope.edytowanyStudent = $scope.studenci[index];
+		$scope.pobierzOcenyStudenta();
 	}
 	
 	$scope.dodajStudenta=function(){
@@ -55,7 +57,30 @@ app.controller('MainCtrl', function($scope,$http) {
 		$scope.active="wystawOcene";
 	}
 	
+	$scope.dodajOcene=function(index){
+		var przedmiot = $scope.przedmioty[index].nazwa;
+		$http({
+			method: "PUT",
+			url: appName+"/studenci/dodajOcene/student/"+$scope.edytowanyStudent.id+"/przedmiot/"+przedmiot,
+			data: $scope.ocenaDoDodania,
+		}).success(function(data){
+			alert(data);
+			$scope.ocenaDoDodania="";
+		});
+	}
+	
 	$scope.wrocDoEdycji=function(){
+		$scope.pobierzOcenyStudenta();
 		$scope.active="edycja";
 	}
+	
+	$scope.pobierzOcenyStudenta=function(){
+		$scope.ocenyStudenta = {};
+		$http({
+			method: "GET",
+			url: appName+"/studenci/pobierzOcenyStudenta/"+$scope.edytowanyStudent.id,
+		}).success(function(data){
+			$scope.ocenyStudenta = data;
+		});
+	}	
 });

@@ -25,16 +25,15 @@
 	</div>
 	
 	<div ng-show="active == 'lista'"> 
-	<span> Szukaj studenta: <input type="text" ng-model="filtrStudenta"></input> </span>
 		<h1>Lista studentów</h1>
-  
+ 		<span> Szukaj studenta: <input type="text" ng-model="filtrStudenta"></input> </span>
   		<ul ng-repeat="student in studenci | filter:filtrStudenta">
 		<li> 
 			{{student.imie}} {{student.nazwisko}}
 			<a class="buttons edit" href="#"  ng-click="edytujStudenta($index)">Edycja</a>
 		</li>
   		</ul>
-  
+  		
   		<input type="button" class="buttons" value="Wczytaj studentów" ng-click="pokazStudentow()"/>
 	</div>
 	
@@ -48,8 +47,12 @@
 		<a class="buttons delete" href="#"  ng-click="usunStudenta()">Usuń studenta</a>
 		<a class="buttons add" href="#" ng-click="wystawOcene()">Wystaw ocene</a>
 		
-		
-		
+		<h1> Lista ocen studenta:</h1>
+			<ul ng-repeat="ocena in ocenyStudenta">
+			<li> 
+			{{ocena.przedmiot.nazwa}}   {{ocena.wysokosc}}
+			</li>
+  			</ul>
 	</div>
 	
 	<div ng-show="active == 'dodaj'">
@@ -82,18 +85,21 @@
 	
 	<div ng-show="active=='wystawOcene'">
 		<div> 
-			<h1>Lista przedmiotow </h1>
-  
+		<form name="ocenaForm">
+		<h1>Ocena (w formacie X.X):<input name="ocena" ng-model="ocenaDoDodania" size=1 required="true"/></h1>
+		<h1>Wybierz przedmiot: </h1>
   				<ul ng-repeat="przedmiot in przedmioty">
 					<li> 
-						{{przedmiot.nazwa}}
-						<input ng-model="ocenaDoWystawienia" type="text" size=1 />
-						<a class="buttons save" href="#"  ng-click="dodajOcene($index)">Dodaj ocene</a>
+						{{przedmiot.nazwa}} 
+						<input class="buttons save" type="button" value="Dodaj ocene" ng-disabled = "ocenaForm.ocena.$invalid"  ng-click="dodajOcene($index)"/>
+						
 					</li>
   				</ul>
+  		</form>
 		</div>
 		<a class="buttons" href="#"  ng-click="wrocDoEdycji()">Wróc do edycji studenta</a>
 	</div>
+	
 
 	
 </div>
