@@ -4,6 +4,7 @@ import java.util.List;
 
 import javahive.api.StudenciApi;
 import javahive.api.dto.StudentDTO;
+import javahive.domain.Przedmiot;
 
 import javax.inject.Inject;
 
@@ -29,6 +30,12 @@ public class StudentController {
     public @ResponseBody
     List<StudentDTO> getStudentList() {
         return studenciApi.getListaWszystkichStudentow();
+    }
+    
+    @RequestMapping("/przedmioty")
+    public @ResponseBody
+    List<Przedmiot> getPrzedmiotList() {
+        return studenciApi.getPrzemioty();
     }
 
     @RequestMapping("/ping")
