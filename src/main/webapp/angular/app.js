@@ -30,8 +30,8 @@ app.controller('MainCtrl', function($scope,$http) {
 	$scope.usunStudenta=function(){
 		$http.delete(appName+'/studenci/usunStudenta/'+$scope.edytowanyStudent.id).
 		success(function(data) {
-    	  alert(data);
-    	  $scope.message=data;
+    	 // alert(data);
+    	  $.notify(data,"success");
     	  $scope.active="lista";
     	  $scope.pokazStudentow();
       });
@@ -49,8 +49,9 @@ app.controller('MainCtrl', function($scope,$http) {
 			url: appName+"/studenci/dodajStudenta",
 			data: $scope.studentForm,
 		}).success(function(data){	
-			alert(data);
-			$scope.message=data;
+			//alert(data);
+			$.notify(data,"success");
+
 			$scope.studentForm = {};
 		});
 		
@@ -69,7 +70,8 @@ app.controller('MainCtrl', function($scope,$http) {
 			data: $scope.ocenaDoDodania,
 		}).success(function(data){
 		
-			alert(data);
+			//alert(data);
+			$.notify(data,"success");
 			$scope.ocenaDoDodania="";
 		});
 	}
@@ -90,7 +92,4 @@ app.controller('MainCtrl', function($scope,$http) {
 	}	
 });
 
-$('.top-left').notify({
-    message: { text: message }
-  }).show();
 

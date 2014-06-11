@@ -2,14 +2,16 @@
 <head>
   <meta charset="utf-8">
   <title>Student App</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" type="text/css" href="alert-bangtidy.css">
+  
+  
+      <script src="http://getbootstrap.com/2.3.2/assets/js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
   <script src="app.js"></script>
-    <script src="bootstrap-notify.js"></script>
+    <script src="notify.min.js"></script>
 
 </head>
-<div class='notifications top-left'></div>
 <body ng-controller="MainCtrl">
 <div id="main" ng-app>
 	<!-- The navigation menu will get the value of the "active" variable as a class.
@@ -82,7 +84,7 @@
 				<label>Pola oznaczone * są wymagane</label>
 			</div>
 			<div>
-				<input class="buttons" ng-disabled = "formularzDodawania.$invalid" type="button" value="Dodaj studenta" ng-click="dodajStudenta()">
+				<input class="buttons" class='btn show-blackgloss' ng-disabled = "formularzDodawania.$invalid" type="button" value="Dodaj studenta" ng-click="dodajStudenta()">
 			</div>
 		</form>
 	</div>
@@ -107,6 +109,7 @@
 
 	
 </div>
+
 <!-- 
 
 <h1>Lista studentów :)</h1>
@@ -123,5 +126,6 @@
   <input type="button" value="Pobierz studentów" ng-click="pokazStudentow()"/>
   <input type="button" value="test" ng-click="test()"/>
   -->
+  
 </body>
 </html>
