@@ -25,9 +25,10 @@
 	</div>
 	
 	<div ng-show="active == 'lista'"> 
+	<span> Szukaj studenta: <input type="text" ng-model="filtrStudenta"></input> </span>
 		<h1>Lista studentów</h1>
   
-  		<ul ng-repeat="student in studenci">
+  		<ul ng-repeat="student in studenci | filter:filtrStudenta">
 		<li> 
 			{{student.imie}} {{student.nazwisko}}
 			<a class="buttons edit" href="#"  ng-click="edytujStudenta($index)">Edycja</a>
