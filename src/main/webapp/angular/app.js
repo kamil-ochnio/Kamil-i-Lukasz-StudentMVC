@@ -3,6 +3,7 @@ var app = angular.module('student', []);
 var appName = "/Student-MVC.Winiarczyk-Ochnio";
 app.controller('MainCtrl', function($scope,$http) {
 	$scope.active="home";
+	$scope.message;
 	$scope.aktywnaListaPrzedmiotow=0;
 	$scope.name = "Felipe";
 	$scope.edytowanyStudent;
@@ -30,6 +31,7 @@ app.controller('MainCtrl', function($scope,$http) {
 		$http.delete(appName+'/studenci/usunStudenta/'+$scope.edytowanyStudent.id).
 		success(function(data) {
     	  alert(data);
+    	  $scope.message=data;
     	  $scope.active="lista";
     	  $scope.pokazStudentow();
       });
@@ -48,6 +50,7 @@ app.controller('MainCtrl', function($scope,$http) {
 			data: $scope.studentForm,
 		}).success(function(data){	
 			alert(data);
+			$scope.message=data;
 			$scope.studentForm = {};
 		});
 		
@@ -65,6 +68,7 @@ app.controller('MainCtrl', function($scope,$http) {
 			url: appName+"/studenci/dodajOcene/student/"+$scope.edytowanyStudent.id+"/przedmiot/"+przedmiot,
 			data: $scope.ocenaDoDodania,
 		}).success(function(data){
+		
 			alert(data);
 			$scope.ocenaDoDodania="";
 		});
@@ -85,3 +89,8 @@ app.controller('MainCtrl', function($scope,$http) {
 		});
 	}	
 });
+
+$('.top-left').notify({
+    message: { text: message }
+  }).show();
+
