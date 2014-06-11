@@ -26,13 +26,13 @@ public class StudentController {
     @Inject
     private StudenciApi studenciApi;
 
-    @RequestMapping("/lista")
+    @RequestMapping(value = "/lista", method = RequestMethod.GET)
     public @ResponseBody
     List<StudentDTO> getStudentList() {
         return studenciApi.getListaWszystkichStudentow();
     }
     
-    @RequestMapping("/przedmioty")
+    @RequestMapping(value = "/przedmioty", method = RequestMethod.GET)
     public @ResponseBody
     List<Przedmiot> getPrzedmiotList() {
         return studenciApi.getPrzemioty();

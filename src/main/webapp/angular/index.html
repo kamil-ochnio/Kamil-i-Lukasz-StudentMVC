@@ -45,22 +45,11 @@
 		<h1>{{edytowanyStudent.imie}}		{{edytowanyStudent.nazwisko}} </h1>
 		<h3> nr indeksu: {{edytowanyStudent.numerIndeksu}}</h3>
 		<br/>
-		<a class="buttons edit " href="#"  ng-click="edytujStudenta()">Edytuj dane studenta</a>
+<!-- 		<a class="buttons edit " href="#"  ng-click="edytujStudenta()">Edytuj dane studenta</a> -->
 		<a class="buttons delete" href="#"  ng-click="usunStudenta()">Usuń studenta</a>
-		<a class="buttons add" href="#" ng-click="aktywnaListaPrzedmiotow=1">Wystaw ocene</a>
+		<a class="buttons add" href="#" ng-click="wystawOcene()">Wystaw ocene</a>
 		
-		<div ng-show=aktywnaListaPrzedmiotow==1> 
-		<h1>Lista przedmiotow </h1>
-  
-  			<ul ng-repeat="przedmiot in przedmioty">
-			<li> 
-			{{przedmiot.nazwa}}
-			<a class="buttons add" href="#"  ng-click="dodajOcene($index)">Edycja</a>
-			</li>
-  			</ul>
-  
-  			<input type="button" class="buttons" value="Wczytaj przedmioty" ng-click="pokazPrzedmioty()"/>
-		</div>
+		
 		
 	</div>
 	
@@ -92,6 +81,20 @@
 		</form>
 	</div>
 	
+	<div ng-show="active=='wystawOcene'">
+		<div> 
+			<h1>Lista przedmiotow </h1>
+  
+  				<ul ng-repeat="przedmiot in przedmioty">
+					<li> 
+						{{przedmiot.nazwa}}
+						<input ng-model="ocenaDoWystawienia" type="text" size=1 />
+						<a class="buttons save" href="#"  ng-click="dodajOcene($index)">Dodaj ocene</a>
+					</li>
+  				</ul>
+		</div>
+		<a class="buttons" href="#"  ng-click="wrocDoEdycji()">Wróc do edycji studenta</a>
+	</div>
 
 	
 </div>
