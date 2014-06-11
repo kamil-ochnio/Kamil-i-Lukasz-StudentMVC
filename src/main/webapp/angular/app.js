@@ -1,3 +1,4 @@
+
 var app = angular.module('student', []);
 var appName = "/Student-MVC.Winiarczyk-Ochnio";
 app.controller('MainCtrl', function($scope,$http) {
@@ -43,7 +44,7 @@ app.controller('MainCtrl', function($scope,$http) {
 			method: "PUT",
 			url: appName+"/studenci/dodajStudenta",
 			data: $scope.studentForm,
-		}).success(function(data){
+		}).success(function(data){	
 			alert(data);
 			$scope.studentForm = {};
 		});
