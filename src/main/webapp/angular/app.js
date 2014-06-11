@@ -5,6 +5,7 @@ app.controller('MainCtrl', function($scope,$http) {
 	$scope.aktywnaListaPrzedmiotow=0;
 	$scope.name = "Felipe";
 	$scope.edytowanyStudent;
+	$scope.ocenaDoDodania;
 	$scope.studentForm = {};
 	$scope.pokazStudentow=function(){
 		$http.get(appName+'/studenci/lista').
@@ -47,5 +48,14 @@ app.controller('MainCtrl', function($scope,$http) {
 			$scope.studentForm = {};
 		});
 		
+	}
+	
+	$scope.wystawOcene=function(){
+		$scope.pokazPrzedmioty();
+		$scope.active="wystawOcene";
+	}
+	
+	$scope.wrocDoEdycji=function(){
+		$scope.active="edycja";
 	}
 });
